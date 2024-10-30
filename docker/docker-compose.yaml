@@ -1,0 +1,17 @@
+services:
+  elixir:
+    image: ghcr.io/range3/elixir:devel
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: elixir-container
+    volumes:
+      - elixir-data:/srv/elixir-data
+    environment:
+      - PYTHONUNBUFFERED=1
+    ports:
+      - "${ELIXIR_PORT:-3080}:80"
+    restart: unless-stopped
+
+volumes:
+  elixir-data:

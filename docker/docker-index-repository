@@ -1,0 +1,43 @@
+#!/bin/bash
+set -euo pipefail
+
+usage() {
+  echo "Usage: $0 [-c container_name] <repository_name> <repository_url>"
+  echo "  -c container_name: (optional) Docker container name, default is 'elixir-container'"
+  echo "  repository_name: (required) Name of the repository to index"
+  echo "  repository_url: (required) URL of the repository to index"
+  exit 1
+}
+
+CONTAINER_NAME="elixir-container"
+
+while getopts "c:" opt; do
+  case ${opt} in
+    c )
+      CONTAINER_NAME=$OPTARG
+      ;;
+    \? )
+      usage
+      ;;
+  esac
+done
+shift $((OPTIND -1))
+
+if [ "$#" -lt 2 ]; then
+  usage
+fi
+
+REPO_NAME="$1"
+REPO_URL="$2"
+
+cmd_index=(
+  docker exec
+  -it
+  -e PYTHONUNBUFFERED=1
+  "$CONTAINER_NAME"
+  /bin/bash -c
+    "export PATH=\"/usr/local/elixir/venv/bin:\$PATH\" \
+    && /usr/local/elixir/utils/index-repository $REPO_NAME $REPO_URL"
+)
+
+"${cmd_index[@]}"
