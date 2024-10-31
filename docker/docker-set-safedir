@@ -1,0 +1,22 @@
+#!/bin/bash
+set -euo pipefail
+
+CONTAINER_NAME="elixir-container"
+
+SCRIPT='
+for repo in /srv/elixir-data/*/repo; do
+  if [ -d "$repo" ]; then
+    git config --system --add safe.directory "$repo"
+  fi
+done
+'
+
+cmd=(
+  docker exec
+  -it
+  "$CONTAINER_NAME"
+  /bin/bash -c
+  "$SCRIPT"
+)
+
+"${cmd[@]}"
