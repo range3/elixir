@@ -492,7 +492,7 @@ def generate_source(q, project, version, path):
     html_code_block = format_code(fname, code)
 
     # Replace line numbers by links to the corresponding line in the current file
-    html_code_block = sub('href="#-(\d+)', 'name="L\\1" id="L\\1" href="#L\\1', html_code_block)
+    html_code_block = sub('href="#-(\d+)', 'name="L\\1" id="L\\1" href="#codeline-\\1', html_code_block)
 
     for f in filters:
         html_code_block = f.untransform_formatted_code(filter_ctx, html_code_block)
@@ -621,7 +621,7 @@ def symbol_instance_to_entry(base_url, symbol):
         line_numbers = [symbol.line]
 
     lines = [
-        LineWithURL(l, f'{ base_url }/{ symbol.path }#L{ l }')
+        LineWithURL(l, f'{ base_url }/{ symbol.path }#codeline-{ l }')
         for l in line_numbers
     ]
 
@@ -775,4 +775,3 @@ def get_application():
     return app
 
 application = get_application()
-

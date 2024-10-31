@@ -57,16 +57,16 @@ function generateSymbolDefinitionsHTML(symbolDefinitions, project, version) {
     let ln = sd.line.toString().split(',');
     if (ln.length == 1) {
       let n = ln[0];
-      result += `<li><a href="/${project}/${version}/source/${sd.path}#L${n}"><strong>${sd.path}</strong>, line ${n} <em>(as a ${sd.type})</em></a>`;
+      result += `<li><a href="/${project}/${version}/source/${sd.path}#codeline-${n}"><strong>${sd.path}</strong>, line ${n} <em>(as a ${sd.type})</em></a>`;
     } else {
       if (symbolDefinitions.length > 100) {
         let n = ln.length;
-        result += `<li><a href="/${project}/${version}/source/${sd.path}#L${ln[0]}"><strong>${sd.path}</strong>, <em>${n} times</em> <em>(as a ${sd.type})</em></a>`;
+        result += `<li><a href="/${project}/${version}/source/${sd.path}#codeline-${ln[0]}"><strong>${sd.path}</strong>, <em>${n} times</em> <em>(as a ${sd.type})</em></a>`;
       } else {
-        result += `<li><a href="/${project}/${version}/source/${sd.path}#L${ln[0]}"><strong>${sd.path}</strong> <em>(as a ${sd.type})</em></a>`;
+        result += `<li><a href="/${project}/${version}/source/${sd.path}#codeline-${ln[0]}"><strong>${sd.path}</strong> <em>(as a ${sd.type})</em></a>`;
         result += '<ul>';
         for(let n of ln) {
-          result += `<li><a href="/${project}/${version}/source/${sd.path}#L${n}">line ${n}</a></li>`;
+          result += `<li><a href="/${project}/${version}/source/${sd.path}#codeline-${n}">line ${n}</a></li>`;
         }
         result += '</ul>';
       }
@@ -90,16 +90,16 @@ function generateSymbolReferencesHTML(symbolReferences, project, version) {
     let ln = sr.line.split(',');
     if (ln.length == 1) {
       let n = ln[0];
-      result += `<li><a href="/${project}/${version}/source/${sr.path}#L${n}"><strong>${sr.path}</strong>, line ${n}</a>`;
+      result += `<li><a href="/${project}/${version}/source/${sr.path}#codeline-${n}"><strong>${sr.path}</strong>, line ${n}</a>`;
     } else {
       if(symbolReferences.length > 100) {
         let n = ln.length;
-        result += `<li><a href="/${project}/${version}/source/${sr.path}#L${ln[0]}"><strong>${sr.path}</strong>, <em>${n} times</em></a>`;
+        result += `<li><a href="/${project}/${version}/source/${sr.path}#codeline-${ln[0]}"><strong>${sr.path}</strong>, <em>${n} times</em></a>`;
       } else {
-        result += `<li><a href="/${project}/${version}/source/${sr.path}#L${ln[0]}"><strong>${sr.path}</strong></a>`;
+        result += `<li><a href="/${project}/${version}/source/${sr.path}#codeline-${ln[0]}"><strong>${sr.path}</strong></a>`;
         result += '<ul>'
         for(let n of ln) {
-          result += `<li><a href="/${project}/${version}/source/${sr.path}#L${n}">line ${n}</a>`
+          result += `<li><a href="/${project}/${version}/source/${sr.path}#codeline-${n}">line ${n}</a>`
         }
         result += '</ul>'
       }
@@ -120,16 +120,16 @@ function generateDocCommentsHTML(symbolDocComments, project, version) {
     let ln = sd.line.split(',');
     if(ln.length == 1) {
       let n = ln[0];
-      result += `<li><a href="/${project}/${version}/source/${sd.path}#L${n}"><strong>${sd.path}</strong>, line ${n}</a>`;
+      result += `<li><a href="/${project}/${version}/source/${sd.path}#codeline-${n}"><strong>${sd.path}</strong>, line ${n}</a>`;
     } else {
       if(symbolDocComments.length > 100) {
         let n = ln.length;
-        result += `<li><a href="/${project}/${version}/source/${sd.path}#L${ln[0]}"><strong>${sd.path}</strong>, <em>${n} times</em></a>`;
+        result += `<li><a href="/${project}/${version}/source/${sd.path}#codeline-${ln[0]}"><strong>${sd.path}</strong>, <em>${n} times</em></a>`;
       } else {
-        result += `<li><a href="/${project}/${version}/source/${sd.path}#L${ln[0]}"><strong>${sd.path}</strong></a>`;
+        result += `<li><a href="/${project}/${version}/source/${sd.path}#codeline-${ln[0]}"><strong>${sd.path}</strong></a>`;
         result += '<ul>';
         for(let n of ln) {
-          result += `<li><a href="/${project}/${version}/source/${sd.path}#L${n}">line ${n}</a>`;
+          result += `<li><a href="/${project}/${version}/source/${sd.path}#codeline-${n}">line ${n}</a>`;
         }
         result += '</ul>';
       }
